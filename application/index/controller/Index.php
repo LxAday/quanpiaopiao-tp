@@ -3,12 +3,44 @@
 namespace app\index\controller;
 
 use GuzzleHttp\Client;
+use think\facade\Cache;
 
 class Index
 {
-
-    public static function signature(string $host, array $data): object
+    /**
+     * 接口授权
+     * @return object
+     */
+    public function accredit(): object
     {
+        if (request()->get('secretKey') === config('api.secretKey')) {
+            $key = md5(sha1(uniqid('yes', false) . time()));
+            Cache::set(request()->get('userId'), $key, 600);
+            return json([
+                'data' => [
+                    'key' => $key
+                ],
+                'code' => 0,
+                'msg' => '授权成功'
+            ]);
+        }
+        return json([
+            'data' => [],
+            'code' => -1,
+            'msg' => '授权失败'
+        ]);
+    }
+
+
+    /**
+     * 对接接口验证方法
+     * @param string $host
+     * @param array $data
+     * @return object
+     */
+    protected static function signature(string $host, array $data): object
+    {
+
 
         /**
          * 参数加密

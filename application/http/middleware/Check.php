@@ -15,8 +15,8 @@ class Check
      */
     public function handle($request, \Closure $next)
     {
-        if (Cache::get('key')) {
-            if ($request->param('key') === Cache::get('key')) {
+        if (Cache::get($request->param('userId'))) {
+            if ($request->param('key') === Cache::get($request->param('userId'))) {
                 return $next($request);
             }
             return json([
@@ -25,18 +25,6 @@ class Check
                 'msg' => '授权失败'
             ]);
         }
-        if ($request->param('secretKey') === config('api.secretKey')) {
-            $key = md5(sha1(uniqid('yse', false) . time()));
-            Cache::set('key', $key);
-            return json([
-                'data' => [
-                    'key' => $key
-                ],
-                'code' => 0,
-                'msg' => '成功'
-            ]);
-        }
-
         return json([
             'data' => [],
             'code' => -1,
