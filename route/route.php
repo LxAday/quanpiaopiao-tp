@@ -36,3 +36,4 @@ Route::group('api', static function () {
 //9.9包邮精选
     Route::get('op-goods-list', 'index/op_goods_list');
 })->middleware('Check');
+echo  4444;
