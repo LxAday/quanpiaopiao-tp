@@ -20,7 +20,7 @@ return[
     //热搜记录
     'get_top100'             =>'https://openapi.dataoke.com/api/category/get-top100',
     //高效转链
-    'get_privilege_link'     =>'https://openapi.dataoke.com/api/tb-service/get-privilege-link',
+//    'get_privilege_link'     =>'https://openapi.dataoke.com/api/tb-service/get-privilege-link',
     //单品详情
     'get_goods_details'      =>'https://openapi.dataoke.com/api/goods/get-goods-details',
     //大淘客搜索
@@ -31,5 +31,7 @@ return[
     'get_stale_goods_by_time'=>'https://openapi.dataoke.com/api/goods/get-stale-goods-by-time',
     //9.9包邮精选
     'op_goods_list'          =>'https://openapi.dataoke.com/api/goods/nine/op-goods-list',
+    //各大榜单
+    'get_ranking_list'=>'https://openapi.dataoke.com/api/goods/get-ranking-list',
 
 ];

@@ -24,7 +24,7 @@ Route::group('api', static function () {
 //热搜记录
     Route::get('get-top100', 'index/get_top100');
 //高效转链
-    Route::get('get-privilege-link', 'index/get_privilege_link');
+//    Route::get('get-privilege-link', 'index/get_privilege_link');
 //单品详情
     Route::get('get-goods-details', 'index/get_goods_details');
 //大淘客搜索
@@ -35,4 +35,10 @@ Route::group('api', static function () {
     Route::get('get-stale-goods-by-time', 'index/get_stale_goods_by_time');
 //9.9包邮精选
     Route::get('op-goods-list', 'index/op_goods_list');
+//各大榜单
+    Route::get('get-ranking-list', 'index/get_ranking_list');
+//推荐栏目
+    Route::get('recommended-column', 'index/recommended_column');
+//分类图标
+    Route::get('classification-of-icon', 'index/classification_of_icon');
 })->middleware('Check');

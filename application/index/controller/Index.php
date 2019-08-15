@@ -293,6 +293,7 @@ class Index
                 'msg' => $data['msg']
             ]);
         }
+        $data['data']['hotWords'] = array_slice($data['data']['hotWords'], 0, 10);
         //成功
         return json([
             'data' => $data['data'],
@@ -305,38 +306,38 @@ class Index
      * 高效转链
      * @return object
      */
-    public function get_privilege_link(): object
-    {
-        //定义默认请求参数
-        $arr = [
-            //当前版本： v1.0.5
-            'version' => 'v1.0.5',
-            //淘宝商品id
-            'goodsId' => '',
-            //商品的优惠券ID，一个商品在联盟可能有多个优惠券，可通过填写该参数的方式选择使用的优惠券，请确认优惠券ID正确，否则无法正常跳转
-            'couponId' => '',
-            //用户可自由填写当前大淘客账号下已授权淘宝账号的任一pid，若未填写，则默认使用创建应用时绑定的pid
-            'pid' => ''
-        ];
-        //接收请求并合并参数
-        $arr = array_merge($arr, input('get.'));
-        $data = static::signature(config('api.get_privilege_link'), $arr);
-        $data = json_decode($data, true);
-        //失败
-        if ($data['code'] !== 0) {
-            return json([
-                'data' => [],
-                'code' => -1,
-                'msg' => $data['msg']
-            ]);
-        }
-        //成功
-        return json([
-            'data' => $data['data'],
-            'code' => 0,
-            'msg' => $data['msg']
-        ]);
-    }
+//    public function get_privilege_link(): object
+//    {
+//        //定义默认请求参数
+//        $arr = [
+//            //当前版本： v1.0.5
+//            'version' => 'v1.0.5',
+//            //淘宝商品id
+//            'goodsId' => '',
+//            //商品的优惠券ID，一个商品在联盟可能有多个优惠券，可通过填写该参数的方式选择使用的优惠券，请确认优惠券ID正确，否则无法正常跳转
+//            'couponId' => '',
+//            //用户可自由填写当前大淘客账号下已授权淘宝账号的任一pid，若未填写，则默认使用创建应用时绑定的pid
+//            'pid' => ''
+//        ];
+//        //接收请求并合并参数
+//        $arr = array_merge($arr, input('get.'));
+//        $data = static::signature(config('api.get_privilege_link'), $arr);
+//        $data = json_decode($data, true);
+//        //失败
+//        if ($data['code'] !== 0) {
+//            return json([
+//                'data' => [],
+//                'code' => -1,
+//                'msg' => $data['msg']
+//            ]);
+//        }
+//        //成功
+//        return json([
+//            'data' => $data['data'],
+//            'code' => 0,
+//            'msg' => $data['msg']
+//        ]);
+//    }
 
     /**
      * 单品详情
@@ -541,6 +542,140 @@ class Index
                 'msg' => $data['msg']
             ]);
         }
+        //成功
+        return json([
+            'data' => $data['data'],
+            'code' => 0,
+            'msg' => $data['msg']
+        ]);
+    }
+
+    /**
+     * 各大榜单
+     * @return object
+     */
+    public function get_ranking_list(): object
+    {
+        //定义默认请求参数
+        $arr = [
+            // 当前版本： v1.0.2
+            'version' => 'v1.0.2',
+            //1.实时榜 2.全天榜 3.热推榜（热推榜分类无效）4.复购榜
+            'rankType' => 1,
+            //大淘客一级类目id
+            'cid' => ''
+        ];
+        //接收请求并合并参数
+        $arr = array_merge($arr, input('get.'));
+        $data = static::signature(config('api.get_ranking_list'), $arr);
+        $data = json_decode($data, true);
+        //失败
+        if ($data['code'] !== 0) {
+            return json([
+                'data' => [],
+                'code' => -1,
+                'msg' => $data['msg']
+            ]);
+        }
+        $nu = input('get.nu/d') === 0 ? 10 : input('get.nu/d');
+        $data['data'] = array_slice($data['data'], 0, $nu);
+        //成功
+        return json([
+            'data' => $data['data'],
+            'code' => 0,
+            'msg' => $data['msg']
+        ]);
+    }
+
+    /**
+     * 推荐栏目
+     * @return object
+     */
+    public function recommended_column(): object
+    {
+//        //定义默认请求参数
+//        $arr = [
+//            // 当前版本： v1.0.2
+//            'version' => 'v1.0.2',
+//            //1.实时榜 2.全天榜 3.热推榜（热推榜分类无效）4.复购榜
+//            'rankType' => 1,
+//            //大淘客一级类目id
+//            'cid' => ''
+//        ];
+//        //接收请求并合并参数
+//        $arr = array_merge($arr, input('get.'));
+//        $data = static::signature(config('api.get_ranking_list'), $arr);
+//        $data = json_decode($data, true);
+//        //失败
+//        if ($data['code'] !== 0) {
+//            return json([
+//                'data' => [],
+//                'code' => -1,
+//                'msg' => $data['msg']
+//            ]);
+//        }
+
+        $data['msg'] = '成功';
+        $data['data'] = ['美食', '女装', '居家用品', '男装', '数码家电', '鞋品', '母婴', '内衣', '户外运动'];
+        //成功
+        return json([
+            'data' => $data['data'],
+            'code' => 0,
+            'msg' => $data['msg']
+        ]);
+    }
+
+    /**
+     * 分类图标
+     * @return object
+     */
+    public function classification_of_icon(): object
+    {
+//        //定义默认请求参数
+//        $arr = [
+//            // 当前版本： v1.0.2
+//            'version' => 'v1.0.2',
+//            //1.实时榜 2.全天榜 3.热推榜（热推榜分类无效）4.复购榜
+//            'rankType' => 1,
+//            //大淘客一级类目id
+//            'cid' => ''
+//        ];
+//        //接收请求并合并参数
+//        $arr = array_merge($arr, input('get.'));
+//        $data = static::signature(config('api.get_ranking_list'), $arr);
+//        $data = json_decode($data, true);
+//        //失败
+//        if ($data['code'] !== 0) {
+//            return json([
+//                'data' => [],
+//                'code' => -1,
+//                'msg' => $data['msg']
+//            ]);
+//        }
+
+        $data['msg'] = '成功';
+        $data['data'] = [
+            [
+                'img_url' => 'https://img.alicdn.com/imgextra/i2/2053469401/O1CN01s4bCD22JJhxN8pEpi_!!2053469401.png',
+                'title' => '9.9包邮',
+                'data' => []
+            ],
+            [
+                'img_url' => 'https://img.alicdn.com/imgextra/i3/2053469401/O1CN013HamuH2JJhxN8QOlW_!!2053469401.gif',
+                'title' => '疯抢排行',
+                'data' => []
+            ],
+            [
+                'img_url' => 'https://img.alicdn.com/imgextra/i2/2053469401/O1CN011U0OZt2JJhxDih0xv_!!2053469401.png',
+                'title' => '咚咚抢',
+                'data' => []
+            ],
+            [
+                'img_url' => 'https://img.alicdn.com/imgextra/i2/2053469401/O1CN01kWR3C62JJhxJYF7om_!!2053469401.png',
+                'title' => '商品精选',
+                'data' => []
+            ]
+        ];
         //成功
         return json([
             'data' => $data['data'],
