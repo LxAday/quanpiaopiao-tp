@@ -41,4 +41,6 @@ Route::group('api', static function () {
     Route::get('recommended-column', 'index/recommended_column');
 //分类图标
     Route::get('classification-of-icon', 'index/classification_of_icon');
+//推送
+    Route::get('serve-ads', 'index/serve_ads');
 })->middleware('Check');

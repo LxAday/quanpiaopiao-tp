@@ -684,4 +684,51 @@ class Index
         ]);
     }
 
+    /**
+     * 推送
+     * @return object
+     */
+    public function serve_ads(): object
+    {
+//        //定义默认请求参数
+//        $arr = [
+//            // 当前版本： v1.0.2
+//            'version' => 'v1.0.2',
+//            //1.实时榜 2.全天榜 3.热推榜（热推榜分类无效）4.复购榜
+//            'rankType' => 1,
+//            //大淘客一级类目id
+//            'cid' => ''
+//        ];
+//        //接收请求并合并参数
+//        $arr = array_merge($arr, input('get.'));
+//        $data = static::signature(config('api.get_ranking_list'), $arr);
+//        $data = json_decode($data, true);
+//        //失败
+//        if ($data['code'] !== 0) {
+//            return json([
+//                'data' => [],
+//                'code' => -1,
+//                'msg' => $data['msg']
+//            ]);
+//        }
+
+        $data['msg'] = '成功';
+        $data['data'] = [
+            'img_url' => 'https://img.alicdn.com/imgextra/i1/2053469401/O1CN01Mrwm8l2JJhxstUglC_!!2053469401.png',
+            'url1' => '',
+            'url2' => '',
+            'url3' => '',
+            'url4' => '',
+            'url5' => '',
+            'url6' => '',
+            'url7' => '',
+        ];
+        //成功
+        return json([
+            'data' => $data['data'],
+            'code' => 0,
+            'msg' => $data['msg']
+        ]);
+    }
+
 }
